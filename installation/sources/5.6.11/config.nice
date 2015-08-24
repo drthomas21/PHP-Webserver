@@ -1,0 +1,9 @@
+#! /bin/sh
+#
+# Created by configure
+
+'./configure' \
+'--prefix=/usr' \
+'--with-config-file-path=/etc' \
+'--enable-maintainer-zts' \
+"$@"
