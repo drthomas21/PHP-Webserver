@@ -14,7 +14,7 @@ library_names='opcache.so opcache.so opcache.so'
 old_library='opcache.a'
 
 # Libraries that this one depends upon.
-dependency_libs=''
+dependency_libs=' -L/usr/lib/x86_64-linux-gnu'
 
 # Version information for opcache.
 current=0

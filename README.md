@@ -1,4 +1,4 @@
-PHP Webserver
+PHP Webserver - Prophpet
 =============
 
 Description
@@ -18,4 +18,4 @@ Testing Environment
 * Kubuntu 15.04 VM
 * 64-bit
 * RAM: 2048 MB DDR3
-* CPU: Intel 4-core i7-2700K @ 3.50GHz
+* CPU: Intel 22-core i7-2700K @ 3.50GHz

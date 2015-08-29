@@ -33,6 +33,7 @@
 #include "ext/pcre/php_pcre.h"
 #include "ext/sqlite3/php_sqlite3.h"
 #include "ext/ctype/php_ctype.h"
+#include "ext/curl/php_curl.h"
 #include "ext/dom/php_dom.h"
 #include "ext/fileinfo/php_fileinfo.h"
 #include "ext/filter/php_filter.h"
@@ -61,6 +62,7 @@ static zend_module_entry *php_builtin_extensions[] = {
 	phpext_pcre_ptr,
 	phpext_sqlite3_ptr,
 	phpext_ctype_ptr,
+	phpext_curl_ptr,
 	phpext_dom_ptr,
 	phpext_fileinfo_ptr,
 	phpext_filter_ptr,

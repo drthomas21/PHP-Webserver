@@ -549,22 +549,22 @@
 #define HAVE_CTYPE 1
 
 /* */
-/* #undef HAVE_CURL */
+#define HAVE_CURL 1
 
 /* */
-/* #undef HAVE_CURL_EASY_STRERROR */
+#define HAVE_CURL_EASY_STRERROR 1
 
 /* Have cURL with GnuTLS support */
 /* #undef HAVE_CURL_GNUTLS */
 
 /* */
-/* #undef HAVE_CURL_MULTI_STRERROR */
+#define HAVE_CURL_MULTI_STRERROR 1
 
 /* Have cURL with OpenSSL support */
-/* #undef HAVE_CURL_OPENSSL */
+#define HAVE_CURL_OPENSSL 1
 
 /* Have cURL with SSL support */
-/* #undef HAVE_CURL_SSL */
+#define HAVE_CURL_SSL 1
 
 /* Define to 1 if you have the `cuserid' function. */
 #define HAVE_CUSERID 1
@@ -1276,7 +1276,7 @@
 /* #undef HAVE_ONIG */
 
 /* Define to 1 if you have the <openssl/crypto.h> header file. */
-/* #undef HAVE_OPENSSL_CRYPTO_H */
+#define HAVE_OPENSSL_CRYPTO_H 1
 
 /* */
 /* #undef HAVE_OPENSSL_EXT */
@@ -2222,7 +2222,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2015-08-23"
+#define PHP_BUILD_DATE "2015-08-28"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1

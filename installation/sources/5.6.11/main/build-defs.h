@@ -18,7 +18,7 @@
 
 /* $Id$ */
 
-#define CONFIGURE_COMMAND " './configure'  '--prefix=/usr' '--with-config-file-path=/etc' '--enable-maintainer-zts'"
+#define CONFIGURE_COMMAND " './configure'  '--prefix=/usr' '--with-curl' '--with-config-file-path=/etc' '--enable-maintainer-zts'"
 #define PHP_ADA_INCLUDE		""
 #define PHP_ADA_LFLAGS		""
 #define PHP_ADA_LIBS		""
