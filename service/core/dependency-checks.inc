@@ -21,7 +21,8 @@ $arrDependencies = array(
 		"file_get_contents",
 		"file_put_contents",
 		"preg_replace",
-		"preg_match"
+		"preg_match",
+		"readline"
 );
 $arrMissing = array();
 foreach($arrDependencies as $func) {
