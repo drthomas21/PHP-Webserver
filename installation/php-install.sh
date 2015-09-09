@@ -8,7 +8,7 @@ sudo apt-get install -y gcc make automake libzzip-dev libreadline-dev libxml2-de
 cd sources/current
 
 # Configure
-./configure --prefix=/usr --with-curl --with-config-file-path=/etc --enable-maintainer-zts
+./configure --prefix=/usr --with-curl --with-readline --enable-debug --with-config-file-path=/etc --enable-maintainer-zts
 
 # Compile
 sudo make clean && sudo make && sudo make install
