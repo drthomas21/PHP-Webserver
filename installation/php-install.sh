@@ -2,13 +2,13 @@
 sudo apt-get remove php5 php-common -y
 
 # Installing Dependency
-sudo apt-get install -y gcc make automake libzzip-dev libreadline-dev libxml2-dev libssl-dev libmcrypt-dev libcurl4-openssl-dev autoconf
+sudo apt-get install -y gcc make automake libzzip-dev libreadline-dev libxml2-dev libssl-dev libmcrypt-dev libcurl4-openssl-dev autoconf mysql-client
 
 # Go to current dir
 cd sources/current
 
 # Configure
-./configure --prefix=/usr --with-curl --with-readline --enable-debug --with-config-file-path=/etc --enable-maintainer-zts
+./configure --prefix=/usr --with-curl --with-readline --enable-debug --with-config-file-path=/etc --enable-maintainer-zts --with-curl --with-mysqli=mysqlnd --with-openssl
 
 # Compile
 sudo make clean && sudo make && sudo make install
