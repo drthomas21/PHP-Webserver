@@ -2,7 +2,7 @@
 sudo apt-get remove php5 php-common -y
 
 # Installing Dependency
-sudo apt-get install -y gcc build-essential pkg-config make automake libzzip-dev libreadline-dev libxml2-dev libssl-dev libmcrypt-dev libcurl4-openssl-dev autoconf mysql-client imagemagick t1-dev libfontconfig1-dev libfreetype6-dev libgd-dev libgd2-xpm-dev libice-dev libjbig-dev libjpeg-dev libjpeg-turbo8-dev libjpeg8-dev liblzma-dev libpng12-dev libpthread-stubs0-dev libsm-dev libtiff5-dev libtiffxx5 libvpx-dev libx11-dev libx11-doc libxau-dev libxcb1-dev libxdmcp-dev libxpm-dev libmagickwand-dev openssh-server zip bzip2
+sudo apt-get install -y gcc build-essential pkg-config make automake libzzip-dev libreadline-dev libxml2-dev libssl-dev libmcrypt-dev libcurl4-openssl-dev autoconf mysql-client imagemagick libgd2-xpm-dev* libfontconfig1-dev libfreetype6-dev libgd-dev libgd2-xpm-dev libice-dev libjbig-dev libjpeg-dev libjpeg-turbo8-dev libjpeg8-dev liblzma-dev libpng12-dev libpthread-stubs0-dev libsm-dev libtiff5-dev libtiffxx5 libvpx-dev libx11-dev libx11-doc libxau-dev libxcb1-dev libxdmcp-dev libxpm-dev libmagickwand-dev openssh-server zip bzip2
 
 # Go to current dir
 cd sources/current
