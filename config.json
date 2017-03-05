@@ -1,6 +1,6 @@
 {
 	"user":"drthomas21",
-	"port":88,
+	"port":8888,
 	"apps":[{
 		"app":"\\App\\Json\\JsonApp",
 		"config":{
