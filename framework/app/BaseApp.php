@@ -1,7 +1,9 @@
 <?php
 namespace Framework\App;
 abstract class BaseApp {
-	private final function __construct();
+	private final function __construct() {
+		
+	}
 	abstract public function setResponse(\Framework\Model\Inet\Response\Response $Response);
 	abstract public function setResponseCode(int $code);
 	abstract public function setHeader(string $property, string $value);
