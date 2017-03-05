@@ -22,7 +22,6 @@ require_once (__DIR__ . '/requirement.inc');
 // Load autoload
 require_once (__DIR__ . '/autoload.inc');
 use \Framework\Utility\Logger;
-use \App\BaseAppFactory;
 use \Framework\Thread\ParentThread;
 use \Framework\Provider\Routing\RoutingProvider;
 

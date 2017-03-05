@@ -1,6 +1,5 @@
 <?php
 namespace App\SSE;
-use App\BaseAppFactory;
 use Framework\Controller\BaseController;
 
 class ServerSentEventApp extends \Framework\App\BaseServerSentEventApp {

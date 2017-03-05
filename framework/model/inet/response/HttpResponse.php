@@ -325,7 +325,7 @@ class HttpResponse extends Response {
 			}
 
 			$content .= "Date: " . date('r').PHP_EOL;
-			$content .= "Server: ".\App\BaseAppFactory::APPLICATION_NAME."/".\App\BaseAppFactory::APPLICATION_VERSION . PHP_EOL;
+			$content .= "Server: ".\Framework\Factory\App\BaseAppFactory::APPLICATION_NAME."/".\Framework\Factory\App\BaseAppFactory::APPLICATION_VERSION . PHP_EOL;
 		}
 
 		$this->headersSent = true;
