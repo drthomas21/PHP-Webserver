@@ -1,7 +1,7 @@
 <?php
 namespace Framework\App;
 abstract class BaseApp {
-	public final function __construct(\stdClass $config = \stdClass()) {
+	public final function __construct(\stdClass $config = null) {
 		if(is_object($config) && $config) {
 			$this->config($config);
 		}
