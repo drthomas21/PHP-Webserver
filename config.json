@@ -1,6 +1,6 @@
 {
 	"user":"drthomas21",
-	"port":8080,
+	"port":88,
 	"apps":[{
 		"app":"\\App\\Json\\JsonApp",
 		"config":{
@@ -12,29 +12,6 @@
 		"config":{
 			"name":"SSE Sample App",
 			"hostname":"sse.superlunchvote.com"
-		}
-	},{
-		"app":"\\App\\Signz\\SignzApp",
-		"config":{
-			"name":"Signz API v1",
-			"hostname":"signz.superlunchvote.com",
-			"memcached":{
-				"driver":"\\Framework\\Driver\\Memcached\\Memcached",
-				"servers":[{
-					"host":"localhost",
-					"port":11211
-				}]
-			},
-			"database":{
-				"driver":"\\Framework\\Driver\\Database\\Mysql",
-				"server":{
-					"host":"localhost",
-					"port":3306,
-					"username":"signz",
-					"password":"9m@^fD;7b(,/DsEe",
-					"schema":"signz"
-				}
-			}
 		}
 	}],
 	"memory":{
