@@ -4,7 +4,7 @@ use Framework\Driver\Memcached\BaseMemcachedDriver;
 use Framework\Driver\Database\BaseDatabaseDriver;
 use Framework\Controller\BaseController;
 
-class SignzApp extends \Framework\App\BaseJsonApp {
+class JsonApp extends \Framework\App\BaseJsonApp {
 	var $config;
 
 	protected function config(\stdClass $config) {
