@@ -19,7 +19,7 @@ abstract class BaseApp {
 
 	protected function config(\stdClass $config) {
 		$this->config = $config;
-		$this->hostname = property_exists('hostname',$config) ? $config->hostname : get_class();
+		$this->hostname = property_exists($config,'hostname') ? $config->hostname : get_class();
 		$this->appName = get_class();
 	}
 
