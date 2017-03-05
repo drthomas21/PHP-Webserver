@@ -10,6 +10,7 @@ abstract class BaseApp {
 
 	abstract protected function config(\stdClass $config);
 
+	abstract public function init();
 	abstract public function setResponse(\Framework\Model\Inet\Response\Response $Response);
 	abstract public function setResponseCode(int $code);
 	abstract public function setHeader(string $property, string $value);

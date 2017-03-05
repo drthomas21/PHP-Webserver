@@ -8,6 +8,10 @@ abstract class BaseJsonApp extends BaseApp {
 	var $Memcached;
 	var $Database;
 
+	public final function init() {
+		$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
+	}
+
 	public final function setResponse(\Framework\Model\Inet\Response\Response $Response) {
 		$this->Response = $Response;
 	}
