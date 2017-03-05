@@ -51,7 +51,7 @@ Logger::logMessage ( "Server starting up" );
 
 //Load Apps
 foreach($config->apps as $app) {
-	RoutingProvider::registerApp(\Framework\App\BaseAppFactory::getInstance($app->app,$app->config));
+	RoutingProvider::registerApp(\Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config));
 }
 
 //Parent Start Socket
