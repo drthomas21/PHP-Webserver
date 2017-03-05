@@ -5,12 +5,6 @@ use Framework\Driver\Database\BaseDatabaseDriver;
 use Framework\Controller\BaseController;
 
 class JsonApp extends \Framework\App\BaseJsonApp {
-	var $config;
-
-	protected function config(\stdClass $config) {
-		$this->config = $config;
-	}
-
 	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
 		$this->setResponseCode(200);
 		$this->setHeader("content_type","application/json; charset=UTF-8");

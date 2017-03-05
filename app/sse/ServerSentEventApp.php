@@ -3,12 +3,6 @@ namespace App\SSE;
 use Framework\Controller\BaseController;
 
 class ServerSentEventApp extends \Framework\App\BaseServerSentEventApp {
-	var $config;
-
-	protected function config(\stdClass $config) {
-		$this->config = $config;
-	}
-
 	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
 		$this->setResponseCode(200);
 		$this->setHeader("content_type","text/event-stream;charset=UTF-8");

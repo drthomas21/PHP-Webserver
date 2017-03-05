@@ -1,14 +1,8 @@
 <?php
 namespace Framework\App;
 abstract class BaseJsonApp extends BaseApp {
-	private $Response = null;
-	private $hostname;
-	private $appName;
-
-	var $Memcached;
-	var $Database;
-
-	public final function init() {
+	public function init() {
+		parent::init();
 		$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
 	}
 
