@@ -6,9 +6,10 @@ class RoutingProvider {
 		self::$apps[$App->getHostname()] = $App;
 	}
 
-	public static function processRequest(\Framework\Model\Inet\Request\Request $Request):\Framework\Model\Inet\Response\Response {
+	public static function processRequest(\Framework\Model\Inet\Request\Request $Request, \Framework\Thread\ChildThread $Thread):\Framework\Model\Inet\Response\Response {
 		$type = strtoupper(str_replace("Request","",array_slice(explode('\\',get_class($Request)),-1)[0]));
 		$Response = \Framework\Factory\Inet\ResponseBuilder::buildResponse("{$type}/{$Request->version}");
+		$Response->setThread($Thread);
 		$requestHost = preg_replace("/\:[0-9]+$/","",$Request->host);
 		if(array_key_exists($requestHost,self::$apps)) {
 			$App = self::$apps[$requestHost];

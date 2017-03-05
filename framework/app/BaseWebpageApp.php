@@ -3,7 +3,7 @@ namespace Framework\App;
 abstract class BaseWebpageApp extends BaseApp {
 	public function init() {
 		parent::init();
-		$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
+		//$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
 	}
 
 	public final function setResponse(\Framework\Model\Inet\Response\Response $Response) {
