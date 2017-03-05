@@ -2,7 +2,7 @@
 namespace Framework\Provider\Routing;
 class RoutingProvider {
 	private static $apps = array();
-	public static function registerApp(\Framework\App\BaseAppFactory $App) {
+	public static function registerApp(\Framework\App\BaseApp $App) {
 		self::$apps[$App->getHostname()] = $App;
 	}
 
