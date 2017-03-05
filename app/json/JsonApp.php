@@ -9,11 +9,10 @@ class JsonApp extends \Framework\App\BaseJsonApp {
 		$this->setResponseCode(200);
 		$this->setHeader("content_type","application/json; charset=UTF-8");
 
-		if(preg_match("/^\/users\/?\?(.+)/", $Request->path, $matches)) {
-			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\User', $Request,$this);
-		} elseif(preg_match("/^\/places\/?\?(.+)/", $Request->path, $matches)) {
-			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\Place', $Request,$this);
+		if(preg_match("/^\/timestamp/", $Request->path, $matches)) {
+			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\Timestamp', $Request,$this);
 		} else {
+			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\404', $Request,$this);
 			$this->setResponseCode(404);
 		}
 	}
