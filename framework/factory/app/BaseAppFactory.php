@@ -9,8 +9,7 @@ abstract class BaseAppFactory {
 		if(!array_key_exists($appName, self::$Instances)) {
 			self::$Instances[$appName] = null;
 			if(is_subclass_of($appName, "\\Framework\\App\\BaseApp",true)) {
-				self::$Instances[$appName] = new $appName();
-				self::$Instances[$appName]->config($config);
+				self::$Instances[$appName] = new $appName($config);
 				self::$Instances[$appName]->setHeader("Server",self::APPLICATION_NAME . ' '. self::APPLICATION_VERSION);
 			}
 		}
