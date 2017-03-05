@@ -1,6 +1,6 @@
 <?php
 namespace Framework\App;
-interface class BaseApp {
+interface BaseApp {
 	private function __construct();
 	public function setResponse(\Framework\Model\Inet\Response\Response $Response);
 	public function setResponseCode(int $code);
