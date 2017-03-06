@@ -1,6 +1,6 @@
 <?php
 namespace App\Json\Controllers;
-class 404Controller extends \Framework\Controller\BaseController {
+class FourOhFourController extends \Framework\Controller\BaseController {
 
 	protected function init() {
 

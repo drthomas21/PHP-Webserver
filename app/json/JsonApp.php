@@ -12,7 +12,7 @@ class JsonApp extends \Framework\App\BaseJsonApp {
 		if(preg_match("/^\/timestamp/", $Request->path, $matches)) {
 			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\Timestamp', $Request,$this);
 		} else {
-			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\404', $Request,$this);
+			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\FourOhFour', $Request,$this);
 			$this->setResponseCode(404);
 		}
 	}
