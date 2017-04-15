@@ -15,9 +15,11 @@ abstract class BaseWebApp extends \Framework\App\BaseApp {
 
 		$matches = array();
 		preg_match("/.+\?(.*)/",$Request->path,$matches);
-		$search = $matches[1];
-		if(!empty($search)) {
-			parse_str($search, $_GET);
+		if(!empty($matches)) {
+			$search = $matches[1];
+			if(!empty($search)) {
+				parse_str($search, $_GET);
+			}
 		}
 
 		if($Request->method == $Request::POST) {
