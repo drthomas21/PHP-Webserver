@@ -1,10 +1,11 @@
 <?php
-namespace Framework\Thread;
-class ParentThread {
-	private $socket;
+namespace App\Webserver;
+class WebServerApp extends \Framework\App\Threaded\BaseThreadedApp {
+    private $socket;
 	private $pids;
 	private $run;
-	public function __construct(int $port) {
+	public function init() {
+        $port = $this->config->port;
 		$this->socket = @socket_create_listen($port,SOMAXCONN);
 		if(!$this->socket) {
 			$num = socket_last_error();
@@ -15,8 +16,12 @@ class ParentThread {
 		socket_set_nonblock($this->socket);
 	}
 
-	public function run() {
-		$this->run = true;
+    public function getAppName(): string {
+        return __CLASS__;
+    }
+
+    public function run() {
+        $this->run = true;
 		do {
 			$client = socket_accept($this->socket);
 			if($client) {
@@ -52,9 +57,9 @@ class ParentThread {
 		} while($this->run);
 
 		socket_close($this->socket);
-	}
+    }
 
-	public function shutdown() {
-		$this->run = false;
-	}
+    public function shutdown() {
+        $this->run = false;
+    }
 }

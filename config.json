@@ -1,19 +1,27 @@
 {
 	"user":"drthomas21",
-	"port":8888,
-	"apps":[{
-		"app":"\\App\\Json\\JsonApp",
-		"config":{
-			"name":"JSON Sample App",
-			"hostname":"json.superlunchvote.com"
-		}
-	},{
-		"app":"\\App\\SSE\\ServerSentEventApp",
-		"config":{
-			"name":"SSE Sample App",
-			"hostname":"sse.superlunchvote.com"
-		}
-	}],
+	"apps":{
+		"web":[{
+			"app":"\\App\\Json\\JsonApp",
+			"config":{
+				"name":"JSON Sample App",
+				"hostname":"json.superlunchvote.com"
+			}
+		},{
+			"app":"\\App\\SSE\\ServerSentEventApp",
+			"config":{
+				"name":"SSE Sample App",
+				"hostname":"sse.superlunchvote.com"
+			}
+		}],
+		"threaded":[{
+			"app":"\\App\\Webserver\\WebserverApp",
+			"config":{
+				"port":8888,
+				"time_limit":0
+			}
+		}]
+	},
 	"memory":{
 		"driver":"\\Framework\\Driver\\Shared\\MemcachedDriver",
 		"config":{

@@ -1,5 +1,5 @@
 <?php
-namespace Framework\Thread;
+namespace App\Webserver;
 class ChildThread {
 	const LOOP_LIMIT = 5;
 	private $id;

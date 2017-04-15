@@ -22,7 +22,6 @@ require_once (__DIR__ . '/requirement.inc');
 // Load autoload
 require_once (__DIR__ . '/autoload.inc');
 use \Framework\Utility\Logger;
-use \Framework\Thread\ParentThread;
 use \Framework\Provider\Routing\RoutingProvider;
 
 // Setup environment
@@ -30,30 +29,23 @@ set_time_limit ( 0 );
 error_reporting ( E_ALL );
 ob_implicit_flush ();
 
-register_shutdown_function ( function () {
-	global $ParentThread, $isChild;
-	if($ParentThread && (!isset($isChild) || !$isChild)) {
-		$ParentThread->shutdown();
-		Logger::logMessage("Server shutting down");
-	}
-} );
-
-function signalHandler($signo) {
-	switch ($signo) {
-		default:
-			Logger::logMessage("Child #{$c} received signal {$signo}");
-			break;
-	}
-}
-
-pcntl_signal(SIGUSR1, "signalHandler");
 Logger::logMessage ( "Server starting up" );
 
-//Load Apps
-foreach($config->apps as $app) {
-	RoutingProvider::registerApp(\Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config));
+//Load Web Apps
+if(!empty($config->apps->web)) {
+	foreach($config->apps->web as $app) {
+		RoutingProvider::registerApp(\Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config));
+	}
 }
 
-//Parent Start Socket
-$ParentThread = new ParentThread($config->port);
-$ParentThread->run();
+//Load Threaded Apps
+if(!empty($config->apps->threaded)) {
+	foreach($config->apps->threaded as $app) {
+		$App = \Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config);
+		$pid;
+        pcntl_fork();
+        if($pid == 0) {
+            $App->run();
+        }
+	}
+}

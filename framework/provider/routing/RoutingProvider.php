@@ -14,6 +14,9 @@ class RoutingProvider {
 		if(array_key_exists($requestHost,self::$apps)) {
 			$App = self::$apps[$requestHost];
 			$App->setResponse($Response);
+			if(method_exists($App,"setupGlobals")){
+				$App->setupGlobals($Request);
+			}
 			$App->processRequest($Request);
 		} else {
 			$Response->setAsNotFound();
