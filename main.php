@@ -56,12 +56,24 @@ if(!empty($config->apps->web)) {
 }
 
 //Load Threaded Apps
+$pids = array();
 if(!empty($config->apps->threaded)) {
 	foreach($config->apps->threaded as $app) {
 		$App = \Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config);
 		$pid = pcntl_fork();
         if($pid == 0) {
             $App->run();
-        }
+        } elseif($pid > 0) {
+			$pids[] = $pid;
+		}
+	}
+}
+
+if(count($pids) > 0) {
+	foreach($pids as $idx => $pid) {
+		pcntl_waitpid($pid,$status,WNOHANG);
+		if($status == -1 || $status > 0) {
+			unset($pids[$idx]);
+		}
 	}
 }

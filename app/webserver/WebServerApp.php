@@ -42,7 +42,7 @@ class WebServerApp extends \Framework\App\Threaded\BaseThreadedApp {
 					exit(EXIT_CHILD_OKAY);
 				} else {
 					$this->pids[] = $pid;
-					if(count($this->pids) > 1000) {
+					if(count($this->pids) > 0) {
 						foreach($this->pids as $idx => $pid) {
 							pcntl_waitpid($pid,$status,WNOHANG);
 					        if($status == -1 || $status > 0) {
