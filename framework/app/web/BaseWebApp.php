@@ -13,7 +13,8 @@ abstract class BaseWebApp extends \Framework\App\BaseApp {
 		global $_GET, $_POST, $_PUT, $_DELETE;
 		$_GET = $_POST = $_PUT = $_DELETE = array();
 
-		preg_match("/.+\?(.*)/","\$1",$Request->path,$matches);
+		$matches = array();
+		preg_match("/.+\?(.*)/",$Request->path,$matches);
 		$search = $matches[1];
 		if(!empty($search)) {
 			parse_str($search, $_GET);
