@@ -29,6 +29,23 @@ set_time_limit ( 0 );
 error_reporting ( E_ALL );
 ob_implicit_flush ();
 
+register_shutdown_function ( function () {
+	global $ParentThread, $isChild;
+	if($ParentThread && (!isset($isChild) || !$isChild)) {
+		$ParentThread->shutdown();
+		Logger::logMessage("Server shutting down");
+	}
+} );
+
+function signalHandler($signo) {
+	switch ($signo) {
+		default:
+			Logger::logMessage("received signal {$signo}");
+			break;
+	}
+}
+
+pcntl_signal(SIGUSR1, "signalHandler");
 Logger::logMessage ( "Server starting up" );
 
 //Load Web Apps
