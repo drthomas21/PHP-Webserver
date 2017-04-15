@@ -12,6 +12,12 @@ abstract class BaseServerSentEventApp extends BaseApp {
 	public final function setResponseCode(int $code) {
 		$this->Response->setStatus($code);
 	}
+	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
+		$this->setResponseCode(200);
+		$this->setHeader("content_type","text/event-stream;charset=UTF-8");
+		$this->setHeader("connection","Keep-Alive");
+		$this->setHeader("Keep-Alive","timeout=5, max=100");
+	}
 	public final function setHeader(string $property, string $value) {
 		if(property_exists($this->Response, $property) && is_string($this->Response->$property)) {
 			$this->Response->$property = $value;
