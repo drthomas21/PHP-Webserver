@@ -18,7 +18,6 @@ class JsonApp extends \Framework\App\Web\BaseJsonApp {
 			$this->setResponseCode(403);
 		} else {
 			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\Default', $Request,$this);
-			$this->setResponseCode(404);
 		}
 	}
 

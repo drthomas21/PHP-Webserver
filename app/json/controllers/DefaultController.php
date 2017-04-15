@@ -30,22 +30,23 @@ class DefaultController extends \Framework\Controller\BaseController {
 	}
 
 	protected function getResp(\Framework\Model\Inet\Request\Request $Request) {
-		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"GET","path"=>$Request->path,"data"=>$Request->data)));
+		global $_GET,$_POST,$_PUT,$_DELETE;
+		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"GET","path"=>$Request->path,"data"=>array("GET"=>$_GET,"POST"=>$_POST,"PUT"=>$_PUT,"DELETE"=>$_DELETE))));
 	}
 
 	protected function postResp(\Framework\Model\Inet\Request\Request $Request) {
-		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"POST","path"=>$Request->path,"data"=>$Request->data)));
+		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"POST","path"=>$Request->path,"data"=>array("GET"=>$_GET,"POST"=>$_POST,"PUT"=>$_PUT,"DELETE"=>$_DELETE))));
 	}
 
 	protected function putResp(\Framework\Model\Inet\Request\Request $Request) {
-		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"PUT","path"=>$Request->path,"data"=>$Request->data)));
+		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"PUT","path"=>$Request->path,"data"=>array("GET"=>$_GET,"POST"=>$_POST,"PUT"=>$_PUT,"DELETE"=>$_DELETE))));
 	}
 
 	protected function deleteResp(\Framework\Model\Inet\Request\Request $Request) {
-		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"DELETE","path"=>$Request->path,"data"=>$Request->data)));
+		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>"DELETE","path"=>$Request->path,"data"=>array("GET"=>$_GET,"POST"=>$_POST,"PUT"=>$_PUT,"DELETE"=>$_DELETE))));
 	}
 
 	protected function defaultResp(\Framework\Model\Inet\Request\Request $Request) {
-		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>$Request->method,"path"=>$Request->path,"data"=>$Request->data)));
+		$this->app->setData(json_encode(array("class"=>__CLASS__,"message"=>"Welcome","method"=>$Request->method,"path"=>$Request->path,"data"=>array("GET"=>$_GET,"POST"=>$_POST,"PUT"=>$_PUT,"DELETE"=>$_DELETE))));
 	}
 }
