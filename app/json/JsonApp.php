@@ -17,7 +17,7 @@ class JsonApp extends \Framework\App\Web\BaseJsonApp {
 			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\FourOhThree', $Request,$this);
 			$this->setResponseCode(403);
 		} else {
-			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\FourOhFour', $Request,$this);
+			BaseController::processRequest(__NAMESPACE__.'\\Controllers\\Default', $Request,$this);
 			$this->setResponseCode(404);
 		}
 	}
