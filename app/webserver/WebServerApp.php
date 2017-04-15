@@ -11,7 +11,7 @@ class WebServerApp extends \Framework\App\Threaded\BaseThreadedApp {
 			$num = socket_last_error();
 			$msg = socket_strerror($num);
 
-			throw new \Framework\Exception\ServerSocketException($msg,$num);
+			throw new \App\Webserver\Exception\ServerSocketException($msg,$num);
 		}
 		socket_set_nonblock($this->socket);
 	}
