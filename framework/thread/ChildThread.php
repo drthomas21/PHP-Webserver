@@ -17,11 +17,34 @@ class ChildThread {
 		$loop++;
 		$Request = null;
 		$Response = null;
-		$bytes = socket_recv($this->client,$buff,2048,MSG_DONTWAIT);
-		if($bytes !== false) {
-			$lines = preg_split("/[\r\n]+/",$buff);
-			$head = array_shift($lines);
-			preg_match("/(GET|POST|PUT|DELETE|OPTIONS) ([A-Za-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\S\&\'\(\)\*\+\,\;\=]+) (HTTP\/[0-9\.]+)/",$head,$matches);
+
+		$start = microtime(true);
+		$raw = "";
+		do {
+			$bytes = socket_recv($this->client,$buff,self::MAX_BUFFER,MSG_DONTWAIT);
+			if($bytes && $bytes > 0) {
+				$raw .= $buff;
+				$start = microtime(true);
+			}
+			usleep(1);
+		} while(microtime(true) - $start < 0.01 && strlen($raw) < self::MAX_BUFFER);
+
+		if(strlen($raw) > 0) {
+			$lines = preg_split("/[\r\n]{1,2}/",$raw);
+			$head = array();
+			$body = array();
+
+			$switch = 0;
+			foreach($lines as $line) {
+				if(empty($line)) {
+					$switch = 1;
+				}
+
+				if($switch == 0) $head[] = $line;
+				else $body[] = $line;
+			}
+
+			preg_match("/(GET|POST|PUT|DELETE|OPTIONS) ([A-Za-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\S\&\'\(\)\*\+\,\;\=]+) (HTTP\/[0-9\.]+)/",implode("\r\n",$head),$matches);
 			if(!empty($matches)) {
 				$this->isConnected = true;
 				$Request = \Framework\Factory\Inet\RequestBuilder::buildRequest($matches[3]);
@@ -29,13 +52,16 @@ class ChildThread {
 				$Request->path = $matches[2];
 
 				$props = array_keys(get_object_vars($Request));
-				foreach($lines as $line) {
+				foreach($head as $line) {
 					$parts = explode(":",$line,2);
 					$head = str_replace('-','_',strtolower($parts[0]));
 					if(in_array($head,$props)) {
 						$Request->$head = trim($parts[1]);
 					}
 				}
+
+				$body = trim(implode("\r\n",$body));
+				$Request->data = $body;
 
 				socket_getpeername($this->client,$address,$port);
 				$Request->client = new \stdClass();
