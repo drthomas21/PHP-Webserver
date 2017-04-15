@@ -15,48 +15,25 @@ abstract class BaseWebApp extends \Framework\App\BaseApp {
 
 		$search = preg_replace("/.+\?(.*)/","\$1",$Request->path);
 		if(!empty($search)) {
-			$args = preg_split("/\&(amp;)?/",$search);
-			foreach($args as $arg) {
-				$parts = explode("=",$arg,2);
-				if(count($parts) == 2) {
-					$_GET[$parts[0]] = $parts[1];
-				}
-			}
+			parse_str($search, $_GET);
 		}
+
 		if($Request->method == $Request::POST) {
 			$data = $Request->data;
 			if(!empty($data)) {
-				$args = preg_split("/\&(amp;)?/",$data);
-				foreach($args as $arg) {
-					$parts = explode("=",$arg,2);
-					if(count($parts) == 2) {
-						$_POST[$parts[0]] = $parts[1];
-					}
-				}
+				parse_str($data, $_POST);
 			}
 		}
 		if($Request->method == $Request::PUT) {
 			$data = $Request->data;
 			if(!empty($data)) {
-				$args = preg_split("/\&(amp;)?/",$data);
-				foreach($args as $arg) {
-					$parts = explode("=",$arg,2);
-					if(count($parts) == 2) {
-						$_PUT[$parts[0]] = $parts[1];
-					}
-				}
+				parse_str($data, $_PUT);
 			}
 		}
 		if($Request->method == $Request::DELETE) {
 			$data = $Request->data;
 			if(!empty($data)) {
-				$args = preg_split("/\&(amp;)?/",$data);
-				foreach($args as $arg) {
-					$parts = explode("=",$arg,2);
-					if(count($parts) == 2) {
-						$_DELETE[$parts[0]] = $parts[1];
-					}
-				}
+				parse_str($data, $_DELETE);
 			}
 		}
 	}
