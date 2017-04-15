@@ -24,7 +24,6 @@ abstract class BaseApp {
 	}
 
 	public function init() {
-		//$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
 		if(empty($this->hostname)) $this->hostname = get_class();
 	}
 
