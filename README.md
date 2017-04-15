@@ -17,3 +17,8 @@ Exception Codes
 100 = InvalidClassException
 200 = ExpiredTokenException
 300 = DataNotFoundException
+
+Sample Tests
+http://json.superlunchvote.com:8888/ - GET, POST, PUT, DELETE
+http://json.superlunchvote.com:8888/timestamp/ - GET
+http://sse.superlunchvote.com:8888/ - Server Sent Event socket
