@@ -2,7 +2,7 @@
 namespace App\SSE;
 use Framework\Controller\BaseController;
 
-class ServerSentEventApp extends \Framework\App\BaseServerSentEventApp {
+class ServerSentEventApp extends \Framework\App\Web\BaseServerSentEventApp {
 	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
 		parent::processRequest($Request);
 		$this->setHeader("Access-Control-Allow-Origin","*");

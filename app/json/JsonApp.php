@@ -4,7 +4,7 @@ use Framework\Driver\Memcached\BaseMemcachedDriver;
 use Framework\Driver\Database\BaseDatabaseDriver;
 use Framework\Controller\BaseController;
 
-class JsonApp extends \Framework\App\BaseJsonApp {
+class JsonApp extends \Framework\App\Web\BaseJsonApp {
 	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
 		parent::processRequest($Request);
 

@@ -1,6 +1,6 @@
 <?php
-namespace Framework\App;
-abstract class BaseJsonApp extends BaseApp {
+namespace Framework\App\Web;
+abstract class BaseWebpageApp extends BaseWebApp {
 	public function init() {
 		parent::init();
 		//$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
@@ -11,10 +11,6 @@ abstract class BaseJsonApp extends BaseApp {
 	}
 	public final function setResponseCode(int $code) {
 		$this->Response->setStatus($code);
-	}
-	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
-		$this->setResponseCode(200);
-		$this->setHeader("content_type","application/json; charset=UTF-8");
 	}
 	public final function setHeader(string $property, string $value) {
 		if(property_exists($this->Response, $property) && is_string($this->Response->$property)) {

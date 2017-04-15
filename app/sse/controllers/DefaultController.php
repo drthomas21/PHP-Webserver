@@ -13,13 +13,13 @@ class DefaultController extends \Framework\Controller\BaseController {
 		}
 
 		elseif($Request->method == $Request::GET) {
-            $this->app->sendHeaders();
+			$this->app->sendHeaders();
 			while($this->app->isClientConnected()) {
 				$resp = new \stdClass();
-	            $resp->cpu = $this->getReports();
-	            $resp->memory = $this->getSeleniumStatus();
+				$resp->cpu = $this->getReports();
+				$resp->memory = $this->getSeleniumStatus();
 
-	            $this->app->sendContent($this->buildResponse($resp));
+				$this->app->sendContent($this->buildResponse($resp));
 				sleep(2);
 			}
 		}
@@ -30,27 +30,27 @@ class DefaultController extends \Framework\Controller\BaseController {
 	}
 
 	protected function getReports():array {
-        return sys_getloadavg();
+		return sys_getloadavg();
 	}
 
-    protected function getSeleniumStatus():array {
-        return array(
-            "usage" => memory_get_usage(),
-            "allocated" => memory_get_usage(true),
-            "peak"=>memory_get_peak_usage()
-        );
+	protected function getSeleniumStatus():array {
+		return array(
+			"usage" => memory_get_usage(),
+			"allocated" => memory_get_usage(true),
+			"peak"=>memory_get_peak_usage()
+		);
 	}
 
-    protected function buildResponse(\stdClass $data):string {
-        $ret = "";
-        foreach(get_object_vars($data) as $event => $data) {
-            $ret .= "event: {$event}" . PHP_EOL;
+	protected function buildResponse(\stdClass $data):string {
+		$ret = "";
+		foreach(get_object_vars($data) as $event => $data) {
+			$ret .= "event: {$event}" . PHP_EOL;
 			$ret .= "id: " . time() . PHP_EOL;
-            $ret .= "data: " . json_encode($data) . PHP_EOL;
+			$ret .= "data: " . json_encode($data) . PHP_EOL;
 			$ret .= "retry: 10".PHP_EOL;
-            $ret .= PHP_EOL;
-        }
+			$ret .= PHP_EOL;
+		}
 
-        return $ret;
-    }
+		return $ret;
+	}
 }

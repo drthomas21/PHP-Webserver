@@ -1,7 +1,7 @@
 <?php
 namespace Framework\Thread;
 class ChildThread {
-	const LOOP_LIMIT = 20;
+	const LOOP_LIMIT = 5;
 	private $id;
 	private $shm_key;
 	private $Memory;
@@ -79,16 +79,9 @@ class ChildThread {
 				$Response = \Framework\Factory\Inet\ResponseBuilder::buildResponse("HTTP/1.1");
 				$Response->setAsForbiden();
 			}
-		} elseif($bytes === false) {
-			$num = socket_last_error($this->client);
-			$msg = socket_strerror($num);
-
-			if($num != 11 || $loop > self::LOOP_LIMIT) {
-				throw new \Framework\Exception\ServerSocketException($msg,$num);
-			} else {
-				usleep(1);
-				return $this->run($loop);
-			}
+		} elseif($loop < self::LOOP_LIMIT) {
+			usleep(1);
+			return $this->run($loop);
 		}
 
 		if($Response != null) {

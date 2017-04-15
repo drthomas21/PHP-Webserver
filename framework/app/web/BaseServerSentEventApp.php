@@ -1,6 +1,6 @@
 <?php
-namespace Framework\App;
-abstract class BaseWebpageApp extends BaseApp {
+namespace Framework\App\Web;
+abstract class BaseServerSentEventApp extends BaseWebApp {
 	public function init() {
 		parent::init();
 		//$this->setResponse(new \Framework\Model\Inet\Response\HttpResponse());
@@ -11,6 +11,12 @@ abstract class BaseWebpageApp extends BaseApp {
 	}
 	public final function setResponseCode(int $code) {
 		$this->Response->setStatus($code);
+	}
+	public function processRequest(\Framework\Model\Inet\Request\Request $Request) {
+		$this->setResponseCode(200);
+		$this->setHeader("content_type","text/event-stream;charset=UTF-8");
+		$this->setHeader("connection","Keep-Alive");
+		$this->setHeader("Keep-Alive","timeout=5, max=100");
 	}
 	public final function setHeader(string $property, string $value) {
 		if(property_exists($this->Response, $property) && is_string($this->Response->$property)) {
@@ -29,5 +35,15 @@ abstract class BaseWebpageApp extends BaseApp {
 
 	public final function getAppName(): string {
 		return $this->appName;
+	}
+
+	public final function sendHeaders() {
+		$this->Response->sendHeaders();
+	}
+	public final function sendContent(string $content) {
+		$this->Response->sendContent($content);
+	}
+	public final function isClientConnected(): bool {
+		return $this->Response->isClientConnected();
 	}
 }
