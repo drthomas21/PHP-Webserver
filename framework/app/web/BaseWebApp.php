@@ -13,7 +13,7 @@ abstract class BaseWebApp extends \Framework\App\BaseApp {
 		global $_GET, $_POST, $_PUT, $_DELETE;
 		$_GET = $_POST = $_PUT = $_DELETE = array();
 
-		$search = preg_replace("/\.+?(.*)/","\$1",$Request->path);
+		$search = preg_replace("/.+\?(.*)/","\$1",$Request->path);
 		if(!empty($search)) {
 			$args = preg_split("/\&(amp;)?/",$search);
 			foreach($args as $arg) {
