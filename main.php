@@ -42,8 +42,7 @@ if(!empty($config->apps->web)) {
 if(!empty($config->apps->threaded)) {
 	foreach($config->apps->threaded as $app) {
 		$App = \Framework\Factory\App\BaseAppFactory::getInstance($app->app,$app->config);
-		$pid;
-        pcntl_fork();
+		$pid = pcntl_fork();
         if($pid == 0) {
             $App->run();
         }
