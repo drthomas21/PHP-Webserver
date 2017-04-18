@@ -3,8 +3,8 @@ namespace App\Webserver;
 class ChildThread {
 	const LOOP_LIMIT = 5;
 	const MAX_BUFFER = 2048;
-	const TIME_LIMIT = 0.001;
-	
+	const TIME_LIMIT = 0.005;
+
 	private $id;
 	private $shm_key;
 	private $Memory;
