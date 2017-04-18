@@ -3,6 +3,8 @@ namespace App\Webserver;
 class ChildThread {
 	const LOOP_LIMIT = 5;
 	const MAX_BUFFER = 2048;
+	const TIME_LIMIT = 0.001;
+	
 	private $id;
 	private $shm_key;
 	private $Memory;
@@ -28,7 +30,7 @@ class ChildThread {
 				$start = microtime(true);
 			}
 			usleep(1);
-		} while(microtime(true) - $start < 0.001 && strlen($raw) < self::MAX_BUFFER);
+		} while(microtime(true) - $start < self::TIME_LIMIT && strlen($raw) < self::MAX_BUFFER);
 
 		if(strlen($raw) > 0) {
 			$lines = preg_split("/[\r\n]{1,2}/",$raw);
