@@ -28,7 +28,7 @@ class ChildThread {
 				$start = microtime(true);
 			}
 			usleep(1);
-		} while(microtime(true) - $start < 0.01 && strlen($raw) < self::MAX_BUFFER);
+		} while(microtime(true) - $start < 0.001 && strlen($raw) < self::MAX_BUFFER);
 
 		if(strlen($raw) > 0) {
 			$lines = preg_split("/[\r\n]{1,2}/",$raw);
