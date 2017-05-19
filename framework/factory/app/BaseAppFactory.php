@@ -2,7 +2,7 @@
 namespace Framework\Factory\App;
 abstract class BaseAppFactory {
 	const APPLICATION_NAME = "Prophpet";
-	const APPLICATION_VERSION = "0.1a";
+	const APPLICATION_VERSION = "0.3a";
 	private static $Instances = array();
 
 	public static function getInstance(string $appName, \stdClass $config = null): \Framework\App\BaseApp {

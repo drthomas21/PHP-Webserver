@@ -26,3 +26,4 @@ http://sse.superlunchvote.com:8888/ - Server Sent Event socket
 #### v0.3a
 - adding timeout for child webserver procs
 - improve response time
+- fix issue where parent proc will exit before children procs are finished
