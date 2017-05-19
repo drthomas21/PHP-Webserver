@@ -2,10 +2,13 @@
 namespace App\Webserver;
 class WebServerApp extends \Framework\App\Threaded\BaseThreadedApp {
     private $socket;
-	private $pids;
+	private $childProcs;
 	private $run;
+    private $time_limit;
+
 	public function init() {
         $port = $this->config->port;
+        $this->time_limit = property_exists($this->config,"time_limit") ? intval($this->config->time_limit) : 0;
 		$this->socket = @socket_create_listen($port,SOMAXCONN);
 		if(!$this->socket) {
 			$num = socket_last_error();
@@ -41,13 +44,26 @@ class WebServerApp extends \Framework\App\Threaded\BaseThreadedApp {
 					}
 					exit(EXIT_CHILD_OKAY);
 				} else {
-					$this->pids[] = $pid;
-					if(count($this->pids) > 0) {
-						foreach($this->pids as $idx => $pid) {
+                    \Framework\Utility\Logger::logMessage("Starting Proc {$pid}");
+					$this->childProcs[] = array(
+                        "pid" => $pid,
+                        "timestamp" => time()
+                    );
+
+					if(count($this->childProcs) > 0) {
+						foreach($this->childProcs as $idx => $info) {
+                            $pid = $info['pid'];
+
+                            //Check if the proc is finished
 							pcntl_waitpid($pid,$status,WNOHANG);
 					        if($status == -1 || $status > 0) {
-					        	unset($this->pids[$idx]);
-					        }
+                                \Framework\Utility\Logger::logMessage("Finished Proc {$pid}");
+					        	unset($this->childProcs[$idx]);
+					        } elseif($this->time_limit > 0 && time() - $info['timestamp'] > $this->time_limit) {
+                                \Framework\Utility\Logger::logCritical("Proc {$pid} has exceeded the set time limit");
+                                posix_kill($pid);
+                                unset($this->childProcs[$idx]);
+                            }
 						}
 					}
 				}
