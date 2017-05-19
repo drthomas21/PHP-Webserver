@@ -69,7 +69,7 @@ if(!empty($config->apps->threaded)) {
 	}
 }
 
-if(count($pids) > 0) {
+while(count($pids) > 0) {
 	foreach($pids as $idx => $pid) {
 		pcntl_waitpid($pid,$status,WNOHANG);
 		if($status == -1 || $status > 0) {
