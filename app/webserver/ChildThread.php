@@ -2,7 +2,7 @@
 namespace App\Webserver;
 class ChildThread {
 	const LOOP_LIMIT = 5;
-	const MAX_BUFFER = 2048;
+	const MAX_BUFFER = 2048; //Bytes
 	const TIME_LIMIT = 0.005;
 
 	private $id;
@@ -33,29 +33,29 @@ class ChildThread {
 		} while(microtime(true) - $start < self::TIME_LIMIT && strlen($raw) < self::MAX_BUFFER);
 
 		if(strlen($raw) > 0) {
-			$lines = preg_split("/[\r\n]{1,2}/",$raw);
-			$head = array();
-			$body = array();
-
-			$switch = 0;
-			foreach($lines as $line) {
-				if(empty($line)) {
-					$switch = 1;
-				}
-
-				if($switch == 0) $head[] = $line;
-				else $body[] = $line;
-			}
-
-			preg_match("/(GET|POST|PUT|DELETE|OPTIONS) ([A-Za-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\S\&\'\(\)\*\+\,\;\=]+) (HTTP\/[0-9\.]+)/",implode("\r\n",$head),$matches);
+			preg_match("/(GET|POST|PUT|DELETE|OPTIONS) ([A-Za-z0-9\-\.\_\~\:\/\?\#\[\]\@\!\S\&\'\(\)\*\+\,\;\=]+) (HTTP\/[0-9\.]+)/",$raw,$matches);
 			if(!empty($matches)) {
 				$this->isConnected = true;
+
+				//setup meta data
 				$Request = \Framework\Factory\Inet\RequestBuilder::buildRequest($matches[3]);
 				$Request->method = constant(get_class($Request)."::{$matches[1]}");
 				$Request->path = $matches[2];
+				socket_getpeername($this->client,$address,$port);
+				$Request->client = new \stdClass();
+				$Request->client->address = $address;
+				$Request->client->port = $port;
 
+				$lines = preg_split("/[\r\n]{1,2}/",$raw);
+				$head = array();
+				$body = array();
+
+				//process head
 				$props = array_keys(get_object_vars($Request));
-				foreach($head as $line) {
+				while(!empty($lines)) {
+					$line = array_shift($lines);
+					if(empty($line)) break;
+
 					$parts = explode(":",$line,2);
 					$head = str_replace('-','_',strtolower($parts[0]));
 					if(in_array($head,$props)) {
@@ -63,13 +63,8 @@ class ChildThread {
 					}
 				}
 
-				$body = trim(implode("\r\n",$body));
-				$Request->data = $body;
-
-				socket_getpeername($this->client,$address,$port);
-				$Request->client = new \stdClass();
-				$Request->client->address = $address;
-				$Request->client->port = $port;
+				//process body
+				$Request->data = implode("\r\n",$lines);
 
 				try {
 					$Response = \Framework\Provider\Routing\RoutingProvider::processRequest($Request,$this);
