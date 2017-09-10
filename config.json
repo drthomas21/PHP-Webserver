@@ -20,6 +20,13 @@
 				"port":8888,
 				"time_limit":0
 			}
+		},{
+			"app":"\\App\\Webserver\\WebServerApp_V2",
+			"config":{
+				"port":8080,
+				"thread_limit":10,
+				"time_limit":0
+			}
 		}]
 	},
 	"memory":{
