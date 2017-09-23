@@ -17,7 +17,7 @@ This is an experimental project to see if it is possible to make a fully functio
 200 = ExpiredTokenException
 300 = DataNotFoundException
 
-### Sample Tests
+### Sample Tests (taken offline)
 http://json.superlunchvote.com:8888/ - GET, POST, PUT, DELETE
 http://json.superlunchvote.com:8888/timestamp/ - GET
 http://sse.superlunchvote.com:8888/ - Server Sent Event socket
